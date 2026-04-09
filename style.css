@@ -862,29 +862,33 @@ footer {
 /* ── Mobile (≤ 640px) ── */
 @media (max-width: 640px) {
 
-    /* Garante que nada vaze */
-    *, *::before, *::after { max-width: 100%; }
+    /* Base: tudo dentro da tela */
+    html, body { overflow-x: hidden; width: 100%; }
+    * { max-width: 100%; word-break: break-word; }
 
     /* Header */
     header {
-        padding: 16px 5%;
-        position: sticky;
-        top: 0;
+        padding: 14px 4%;
+        gap: 0;
+        justify-content: space-between;
     }
 
-    .logo { font-size: 1.2rem; letter-spacing: 2px; }
-
-    .nav-toggle { display: flex; }
+    .logo {
+        font-size: 1.1rem;
+        letter-spacing: 2px;
+        flex-shrink: 0;
+    }
 
     nav#mainNav {
         display: none;
         position: fixed;
-        top: 57px;
+        top: 53px;
         left: 0;
-        right: 0;
+        width: 100%;
         background: var(--branco);
         border-bottom: 1px solid var(--nude);
         z-index: 99;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.06);
     }
 
     nav#mainNav.open { display: block; }
@@ -893,39 +897,68 @@ footer {
         flex-direction: column;
         gap: 0;
         padding: 0;
+        width: 100%;
     }
 
     nav#mainNav ul li a {
         display: block;
-        padding: 16px 6%;
-        font-size: 0.82rem;
+        padding: 15px 6%;
+        font-size: 0.8rem;
         border-bottom: 1px solid var(--nude);
+        width: 100%;
+        box-sizing: border-box;
     }
 
     nav#mainNav ul li:last-child a { border-bottom: none; }
 
+    .nav-toggle { display: flex; }
+
+    .header-right { gap: 10px; }
+
     /* Hero */
     .hero {
-        height: 75vh;
-        padding: 0 6%;
-        background: linear-gradient(to bottom, rgba(250,247,244,0.5) 0%, rgba(250,247,244,0.95) 100%),
+        height: 70vh;
+        padding: 0 5%;
+        background: linear-gradient(to bottom, rgba(250,247,244,0.4) 0%, rgba(250,247,244,0.96) 70%),
                     url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80');
         background-size: cover;
         background-position: center top;
         justify-content: flex-end;
-        padding-bottom: 60px;
+        padding-bottom: 52px;
         text-align: center;
+        width: 100%;
+        box-sizing: border-box;
     }
 
-    .hero-content { max-width: 100%; }
-    .hero-content h1 { font-size: 2.2rem; }
-    .hero-content p { font-size: 0.85rem; margin-bottom: 28px; }
+    .hero-content {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+        letter-spacing: 0.02em;
+    }
+
+    .hero-content p { font-size: 0.85rem; margin-bottom: 24px; }
+
+    .btn-shop { padding: 12px 28px; font-size: 0.72rem; }
 
     /* Seções */
     .tabs-section,
-    .ofertas-section { padding: 48px 0 36px; }
+    .ofertas-section {
+        padding: 44px 0 32px;
+        width: 100%;
+        box-sizing: border-box;
+    }
 
-    .section-title { font-size: 1.8rem; margin-bottom: 28px; padding: 0 5%; }
+    .section-title {
+        font-size: 1.7rem;
+        margin-bottom: 24px;
+        padding: 0 5%;
+        box-sizing: border-box;
+    }
+
     .section-label { padding: 0 5%; }
 
     /* Abas */
@@ -933,49 +966,77 @@ footer {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         justify-content: flex-start;
-        padding: 0 5%;
+        padding: 0 4%;
         scrollbar-width: none;
+        width: 100%;
+        box-sizing: border-box;
     }
     .tabs-nav::-webkit-scrollbar { display: none; }
-    .tab-btn { padding: 12px 14px; font-size: 0.68rem; white-space: nowrap; flex-shrink: 0; }
+    .tab-btn {
+        padding: 11px 14px;
+        font-size: 0.68rem;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
 
-    /* Carrossel — chave do overflow */
+    /* Carrossel */
     .carousel-wrapper {
-        padding: 0 10px;
-        gap: 4px;
+        padding: 0 8px;
+        gap: 2px;
         width: 100%;
         box-sizing: border-box;
     }
 
     .carousel-track-container {
-        width: 0;  /* força o flex a calcular corretamente */
-        flex: 1;
         overflow: hidden;
+        flex: 1;
+        min-width: 0;
+        width: 0;
     }
 
-    .carousel-track {
-        gap: 12px;
-    }
+    .carousel-track { gap: 10px; }
 
     .carousel-track .product-card {
-        padding: 16px 12px;
-        min-width: 0 !important; /* o JS vai setar via style */
+        padding: 14px 10px;
+        box-sizing: border-box;
     }
 
-    .carousel-track .product-img { height: 150px; }
-    .carousel-track .product-card h3 { font-size: 1rem; }
+    .carousel-track .product-img { height: 140px; }
 
-    .carousel-btn { width: 32px; height: 32px; opacity: 0.6; }
+    .carousel-track .product-card h3 {
+        font-size: 0.95rem;
+        letter-spacing: 0.02em;
+    }
+
+    .carousel-btn { width: 30px; height: 30px; opacity: 0.5; flex-shrink: 0; }
+
+    .carousel-dots { margin-top: 16px; }
 
     /* Oferta */
-    .oferta-header { padding: 0 5%; flex-direction: column; align-items: flex-start; gap: 6px; }
-    .oferta-bloco { margin-bottom: 44px; }
+    .oferta-header {
+        padding: 0 4%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        box-sizing: border-box;
+    }
+
+    .oferta-bloco { margin-bottom: 40px; }
+
+    .badge-desc { top: 8px; right: 8px; font-size: 0.62rem; padding: 3px 6px; }
 
     /* Info / Contato */
-    .info-section { padding: 48px 6%; }
-    .info-grid { grid-template-columns: 1fr; gap: 32px; }
+    .info-section {
+        padding: 44px 5%;
+        box-sizing: border-box;
+    }
 
-    /* Carrinho drawer — tela cheia no mobile */
+    .info-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+
+    /* Carrinho drawer — tela cheia */
     .cart-drawer {
         width: 100%;
         right: -100%;
@@ -983,6 +1044,6 @@ footer {
 
     .cart-drawer.open { right: 0; }
 
-    /* Dots */
-    .carousel-dots { margin-top: 18px; }
+    /* Footer */
+    footer { padding: 16px 5%; font-size: 0.68rem; }
 }
