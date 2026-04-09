@@ -74,6 +74,10 @@ function initCarousel(panel) {
         return 1;
     }
 
+    function getGap() {
+        return window.innerWidth <= 640 ? 12 : 20;
+    }
+
     function buildDots() {
         dotsContainer.innerHTML = '';
         const total = cards.length - visible + 1;
@@ -93,9 +97,10 @@ function initCarousel(panel) {
     }
 
     function goTo(index) {
+        const gap = getGap();
         const max = cards.length - visible;
         current = Math.max(0, Math.min(index, max));
-        track.style.transform = `translateX(-${current * (cardWidth + 20)}px)`;
+        track.style.transform = `translateX(-${current * (cardWidth + gap)}px)`;
         updateDots();
     }
 
@@ -107,10 +112,12 @@ function initCarousel(panel) {
     }
 
     function setup() {
+        const gap = getGap();
         visible = getVisible();
-        cardWidth = (container.offsetWidth - 20 * (visible - 1)) / visible;
+        track.style.gap = gap + 'px';
+        cardWidth = (container.offsetWidth - gap * (visible - 1)) / visible;
         cards.forEach(c => (c.style.minWidth = cardWidth + 'px'));
-        current = Math.min(current, cards.length - visible);
+        current = Math.min(current, Math.max(0, cards.length - visible));
         buildDots();
         goTo(current);
         startAutoplay();
