@@ -1,0 +1,813 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Jost:wght@300;400;500&display=swap');
+
+:root {
+    --creme: #faf7f4;
+    --nude: #e8d5c4;
+    --terracota: #b07060;
+    --grafite: #2c2c2c;
+    --branco: #ffffff;
+    --sombra: rgba(0,0,0,0.06);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    background-color: var(--creme);
+    color: var(--grafite);
+    letter-spacing: 0.02em;
+}
+
+/* ── Barra de progresso de scroll ── */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 1px;
+    background: var(--terracota);
+    z-index: 999;
+    transition: width 0.1s linear;
+}
+
+
+header {
+    background-color: var(--branco);
+    padding: 24px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--nude);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: padding 0.3s ease, box-shadow 0.3s ease;
+}
+
+.logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1.6rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.logo span {
+    color: var(--terracota);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 36px;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--grafite);
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    position: relative;
+    padding-bottom: 4px;
+    transition: color 0.3s;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--terracota);
+    transition: width 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--terracota);
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+/* ── Hero ── */
+.hero {
+    height: 88vh;
+    background: linear-gradient(to right, rgba(250,247,244,0.85) 40%, rgba(250,247,244,0.2)),
+                url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1350&q=80');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    padding: 0 8%;
+}
+
+.hero-content {
+    max-width: 520px;
+}
+
+.hero-content h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--grafite);
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 0.95rem;
+    color: #6b6b6b;
+    margin-bottom: 36px;
+    line-height: 1.7;
+    letter-spacing: 0.04em;
+}
+
+.btn-shop {
+    background: transparent;
+    color: var(--grafite);
+    padding: 14px 40px;
+    border: 1px solid var(--grafite);
+    cursor: pointer;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: background 0.3s, color 0.3s;
+}
+
+.btn-shop:hover {
+    background: var(--grafite);
+    color: var(--branco);
+}
+
+/* ── Products ── */
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2px;
+    padding: 80px 6%;
+    background: var(--nude);
+}
+
+.product-card {
+    background: var(--branco);
+    padding: 40px 30px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+}
+
+.product-img {
+    background: linear-gradient(135deg, var(--nude), var(--creme));
+    height: 220px;
+    margin-bottom: 24px;
+}
+
+.product-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+}
+
+.product-card p {
+    font-size: 0.85rem;
+    color: var(--terracota);
+    letter-spacing: 0.08em;
+    margin-bottom: 24px;
+}
+
+.product-card button {
+    border: 1px solid var(--grafite);
+    background: transparent;
+    padding: 10px 28px;
+    cursor: pointer;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: background 0.3s, color 0.3s;
+}
+
+.product-card button:hover {
+    background: var(--grafite);
+    color: var(--branco);
+}
+
+/* ── Títulos de seção ── */
+.section-label {
+    text-align: center;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--terracota);
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+.section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 48px;
+    letter-spacing: 0.04em;
+    color: var(--grafite);
+}
+
+/* ── Abas ── */
+.tabs-section {
+    padding: 80px 0 60px;
+    background: var(--creme);
+    overflow: hidden;
+}
+
+.tabs-nav {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 48px;
+    border-bottom: 1px solid var(--nude);
+}
+
+.tab-btn {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 14px 36px;
+    cursor: pointer;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: -1px;
+    transition: color 0.3s, border-color 0.3s;
+}
+
+.tab-btn:hover {
+    color: var(--grafite);
+}
+
+.tab-btn.active {
+    color: var(--grafite);
+    border-bottom-color: var(--terracota);
+}
+
+.tab-panel {
+    display: none;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+/* ── Carrossel ── */
+.carousel-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 4%;
+}
+
+.carousel-track-container {
+    overflow: hidden;
+    flex: 1;
+}
+
+.carousel-track {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.carousel-track .product-card {
+    min-width: 260px;
+    flex-shrink: 0;
+    background: var(--branco);
+    padding: 28px 22px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.carousel-track .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.07);
+    border-color: var(--nude);
+}
+
+.carousel-track .product-img {
+    height: 200px;
+    margin-bottom: 20px;
+    background-size: cover;
+    background-position: center;
+    background-color: var(--nude);
+}
+
+.carousel-track .product-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    margin-bottom: 6px;
+}
+
+.price {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--terracota);
+    letter-spacing: 0.08em;
+    margin-bottom: 20px;
+}
+
+.carousel-track .product-card button {
+    border: 1px solid var(--grafite);
+    background: transparent;
+    padding: 9px 24px;
+    cursor: pointer;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: background 0.3s, color 0.3s;
+}
+
+.carousel-track .product-card button:hover {
+    background: var(--grafite);
+    color: var(--branco);
+}
+
+.carousel-btn {
+    background: transparent;
+    border: none;
+    width: 52px;
+    height: 52px;
+    cursor: pointer;
+    color: var(--grafite);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.4;
+    transition: opacity 0.3s, color 0.3s;
+    padding: 0;
+}
+
+.carousel-btn:hover {
+    opacity: 1;
+    color: var(--terracota);
+    background: transparent;
+}
+
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 32px;
+}
+
+.carousel-dots .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--nude);
+    cursor: pointer;
+    border: none;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.carousel-dots .dot.active {
+    background: var(--terracota);
+    transform: scale(1.3);
+}
+
+/* ── Info / Contato ── */
+.info-section {
+    background: var(--grafite);
+    color: var(--branco);
+    padding: 80px 6%;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 48px;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.info-block {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.info-icon {
+    color: var(--terracota);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    margin-bottom: 4px;
+}
+
+.info-block h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 12px;
+    margin-bottom: 4px;
+}
+
+.info-block p {
+    font-size: 0.85rem;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.75);
+}
+
+.info-sub {
+    font-size: 0.78rem !important;
+    color: rgba(255,255,255,0.45) !important;
+    margin-top: 4px;
+}
+
+.social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 4px;
+}
+
+.social-links a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    transition: color 0.3s;
+}
+
+.social-links a:hover {
+    color: var(--terracota);
+}
+
+/* ── Footer ── */
+footer {
+    background: #1a1a1a;
+    color: rgba(255,255,255,0.35);
+    text-align: center;
+    padding: 20px;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+}
+
+/* ── Ofertas ── */
+.ofertas-section {
+    background: var(--branco);
+    padding: 80px 0 60px;
+    overflow: hidden;
+    border-top: 1px solid var(--nude);
+}
+
+.oferta-bloco {
+    margin-bottom: 60px;
+}
+
+.oferta-bloco:last-child {
+    margin-bottom: 0;
+}
+
+.oferta-header {
+    padding: 0 4%;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.oferta-tag {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--grafite);
+    background: var(--nude);
+    padding: 6px 16px;
+    white-space: nowrap;
+}
+
+.oferta-desc {
+    font-size: 0.82rem;
+    color: #999;
+    letter-spacing: 0.04em;
+}
+
+.oferta-card {
+    position: relative;
+}
+
+.price-old {
+    display: block;
+    font-size: 0.78rem;
+    color: #bbb;
+    text-decoration: line-through;
+    letter-spacing: 0.06em;
+    margin-bottom: 2px;
+}
+
+.price-oferta {
+    color: var(--terracota);
+    font-weight: 500;
+}
+
+.badge-desc {
+    display: inline-block;
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: var(--terracota);
+    color: var(--branco);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    padding: 4px 8px;
+}
+
+/* ── Ícone carrinho no header ── */
+.cart-icon {
+    background: transparent;
+    border: none;
+    padding: 6px;
+    cursor: pointer;
+    color: var(--grafite);
+    position: relative;
+    display: flex;
+    align-items: center;
+    transition: color 0.3s;
+}
+
+.cart-icon:hover {
+    color: var(--terracota);
+}
+
+.cart-count {
+    position: absolute;
+    top: -2px;
+    right: -6px;
+    background: var(--terracota);
+    color: var(--branco);
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    font-size: 0.6rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Jost', sans-serif;
+    font-weight: 500;
+}
+
+/* ── Overlay ── */
+.cart-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    z-index: 200;
+}
+
+.cart-overlay.open { display: block; }
+
+/* ── Drawer ── */
+.cart-drawer {
+    position: fixed;
+    top: 0;
+    right: -420px;
+    width: 400px;
+    max-width: 95vw;
+    height: 100vh;
+    background: var(--branco);
+    z-index: 201;
+    display: flex;
+    flex-direction: column;
+    transition: right 0.4s cubic-bezier(0.4,0,0.2,1);
+    box-shadow: -4px 0 24px rgba(0,0,0,0.08);
+}
+
+.cart-drawer.open { right: 0; }
+
+.cart-drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 28px;
+    border-bottom: 1px solid var(--nude);
+}
+
+.cart-drawer-header h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+}
+
+.cart-close {
+    background: transparent;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    color: var(--grafite);
+    padding: 4px;
+}
+
+.cart-items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.cart-empty {
+    color: #aaa;
+    font-size: 0.85rem;
+    text-align: center;
+    margin-top: 40px;
+}
+
+/* ── Item no carrinho ── */
+.cart-item {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--nude);
+}
+
+.cart-item-img {
+    width: 60px;
+    height: 60px;
+    background-size: cover;
+    background-position: center;
+    background-color: var(--nude);
+    flex-shrink: 0;
+}
+
+.cart-item-info {
+    flex: 1;
+}
+
+.cart-item-info h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 4px;
+}
+
+.cart-item-info span {
+    font-size: 0.8rem;
+    color: var(--terracota);
+}
+
+.cart-item-qty {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.cart-item-qty button {
+    width: 24px;
+    height: 24px;
+    border: 1px solid var(--nude);
+    background: transparent;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.cart-item-qty button:hover { background: var(--nude); }
+
+.cart-item-qty span {
+    font-size: 0.85rem;
+    color: var(--grafite);
+    min-width: 20px;
+    text-align: center;
+}
+
+.cart-item-remove {
+    background: transparent;
+    border: none;
+    color: #ccc;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 4px;
+    transition: color 0.2s;
+}
+
+.cart-item-remove:hover { color: var(--terracota); }
+
+/* ── Footer do carrinho ── */
+.cart-footer {
+    padding: 20px 28px 28px;
+    border-top: 1px solid var(--nude);
+}
+
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    letter-spacing: 0.06em;
+    margin-bottom: 16px;
+}
+
+.cart-total span:last-child {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    color: var(--terracota);
+}
+
+.btn-checkout {
+    width: 100%;
+    background: var(--grafite);
+    color: var(--branco);
+    border: none;
+    padding: 16px;
+    cursor: pointer;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: background 0.3s;
+}
+
+.btn-checkout:hover { background: var(--terracota); }
+
+.btn-checkout:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+/* ── Página de confirmação ── */
+.confirm-page {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+}
+
+.confirm-box {
+    text-align: center;
+    max-width: 480px;
+}
+
+.confirm-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--nude);
+    color: var(--terracota);
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 28px;
+}
+
+.confirm-box h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 300;
+    margin-bottom: 16px;
+}
+
+.confirm-box p {
+    font-size: 0.9rem;
+    color: #777;
+    line-height: 1.7;
+}

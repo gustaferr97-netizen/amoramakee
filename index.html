@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make Beauty | Sua Loja de Maquiagem</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <header>
+        <div class="logo">MAKE<span>BEAUTY</span></div>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#produtos">Produtos</a></li>
+                <li><a href="#ofertas">Ofertas</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+        <button class="cart-icon" id="cartToggle" aria-label="Carrinho">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <path d="M16 10a4 4 0 01-8 0"/>
+            </svg>
+            <span class="cart-count" id="cartCount">0</span>
+        </button>
+    </header>
+
+    <!-- ── Carrinho lateral ── -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <aside class="cart-drawer" id="cartDrawer">
+        <div class="cart-drawer-header">
+            <h3>Seu Carrinho</h3>
+            <button class="cart-close" id="cartClose">&#10005;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p class="cart-empty">Nenhum item adicionado ainda.</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total</span>
+                <span id="cartTotal">R$ 0,00</span>
+            </div>
+            <button class="btn-checkout" id="btnCheckout">Finalizar Compra</button>
+        </div>
+    </aside>
+
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>Realce sua beleza natural</h1>
+            <p>Descubra a coleção de outono com tons suaves e elegantes.</p>
+            <button class="btn-shop" onclick="document.getElementById('produtos').scrollIntoView({behavior:'smooth'})">Ver Coleção</button>
+        </div>
+    </section>
+
+    <!-- ── Abas de Produtos ── -->
+    <section class="tabs-section" id="produtos">
+        <div class="section-label">Coleção</div>
+        <h2 class="section-title">Nossos Produtos</h2>
+
+        <div class="tabs-nav">
+            <button class="tab-btn active" data-tab="rosto">Rosto</button>
+            <button class="tab-btn" data-tab="olhos">Olhos</button>
+            <button class="tab-btn" data-tab="labios">Lábios</button>
+            <button class="tab-btn" data-tab="skincare">Skincare</button>
+        </div>
+
+        <!-- ABA: Rosto -->
+        <div class="tab-panel active" id="tab-rosto">
+            <div class="carousel-wrapper">
+                <button class="carousel-btn prev" aria-label="Anterior"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+                <div class="carousel-track-container">
+                    <div class="carousel-track">
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1631214524020-3c69b3b0b3b3?w=400&q=80')"></div><h3>Base Nude</h3><span class="price">R$ 69,90</span><button>Comprar</button></div>
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&q=80')"></div><h3>Blush Rosé</h3><span class="price">R$ 54,90</span><button>Comprar</button></div>
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1583241800698-e8ab01830a22?w=400&q=80')"></div><h3>Iluminador Pérola</h3><span class="price">R$ 74,90</span><button>Comprar</button></div>
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1599733589046-833f6c4c8b9e?w=400&q=80')"></div><h3>Contorno Soft</h3><span class="price">R$ 59,90</span><button>Comprar</button></div>
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1614159102822-c7e3e3e3e3e3?w=400&q=80')"></div><h3>Primer Matte</h3><span class="price">R$ 44,90</span><button>Comprar</button></div>
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=400&q=80')"></div><h3>Pó Translúcido</h3><span class="price">R$ 49,90</span><button>Comprar</button></div>
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=400&q=80')"></div><h3>Corretivo HD</h3><span class="price">R$ 39,90</span><button>Comprar</button></div>
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1586495777744-4e6232bf2263?w=400&q=80')"></div><h3>BB Cream</h3><span class="price">R$ 64,90</span><button>Comprar</button></div>
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1503236823255-94609f598e71?w=400&q=80')"></div><h3>Bronzer Terra</h3><span class="price">R$ 57,90</span><button>Comprar</button></div>
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=400&q=80')"></div><h3>Setting Spray</h3><span class="price">R$ 34,90</span><button>Comprar</button></div>
+                    </div>
+                </div>
+                <button class="carousel-btn next" aria-label="Próximo"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+            </div>
+            <div class="carousel-dots"></div>
+        </div>
+
+        <!-- ABA: Olhos -->
+        <div class="tab-panel" id="tab-olhos">
+            <div class="carousel-wrapper">
+                <button class="carousel-btn prev" aria-label="Anterior"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+                <div class="carousel-track-container">
+                    <div class="carousel-track">
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=400&q=80')"></div><h3>Paleta Glow</h3><span class="price">R$ 89,90</span><button>Comprar</button></div>
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400&q=80')"></div><h3>Máscara Volume</h3><span class="price">R$ 39,90</span><button>Comprar</button></div>
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=400&q=80')"></div><h3>Delineador Silk</h3><span class="price">R$ 34,90</span><button>Comprar</button></div>
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&q=80')"></div><h3>Paleta Smoky</h3><span class="price">R$ 94,90</span><button>Comprar</button></div>
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1583241800698-e8ab01830a22?w=400&q=80')"></div><h3>Lápis Kajal</h3><span class="price">R$ 24,90</span><button>Comprar</button></div>
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1503236823255-94609f598e71?w=400&q=80')"></div><h3>Primer Olhos</h3><span class="price">R$ 44,90</span><button>Comprar</button></div>
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1586495777744-4e6232bf2263?w=400&q=80')"></div><h3>Máscara Curl</h3><span class="price">R$ 42,90</span><button>Comprar</button></div>
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1631214524020-3c69b3b0b3b3?w=400&q=80')"></div><h3>Sombra Duo</h3><span class="price">R$ 36,90</span><button>Comprar</button></div>
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1599733589046-833f6c4c8b9e?w=400&q=80')"></div><h3>Glitter Fino</h3><span class="price">R$ 29,90</span><button>Comprar</button></div>
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=400&q=80')"></div><h3>Cílios Postiços</h3><span class="price">R$ 19,90</span><button>Comprar</button></div>
+                    </div>
+                </div>
+                <button class="carousel-btn next" aria-label="Próximo"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+            </div>
+            <div class="carousel-dots"></div>
+        </div>
+
+        <!-- ABA: Lábios -->
+        <div class="tab-panel" id="tab-labios">
+            <div class="carousel-wrapper">
+                <button class="carousel-btn prev" aria-label="Anterior"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+                <div class="carousel-track-container">
+                    <div class="carousel-track">
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1586495777744-4e6232bf2263?w=400&q=80')"></div><h3>Batom Velvet</h3><span class="price">R$ 49,90</span><button>Comprar</button></div>
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1503236823255-94609f598e71?w=400&q=80')"></div><h3>Gloss Cristal</h3><span class="price">R$ 29,90</span><button>Comprar</button></div>
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&q=80')"></div><h3>Lip Liner Nude</h3><span class="price">R$ 22,90</span><button>Comprar</button></div>
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1583241800698-e8ab01830a22?w=400&q=80')"></div><h3>Batom Matte</h3><span class="price">R$ 44,90</span><button>Comprar</button></div>
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400&q=80')"></div><h3>Lip Tint Rosa</h3><span class="price">R$ 32,90</span><button>Comprar</button></div>
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=400&q=80')"></div><h3>Batom Coral</h3><span class="price">R$ 47,90</span><button>Comprar</button></div>
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=400&q=80')"></div><h3>Gloss Plump</h3><span class="price">R$ 38,90</span><button>Comprar</button></div>
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1631214524020-3c69b3b0b3b3?w=400&q=80')"></div><h3>Batom Vinho</h3><span class="price">R$ 49,90</span><button>Comprar</button></div>
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1599733589046-833f6c4c8b9e?w=400&q=80')"></div><h3>Lip Balm Gold</h3><span class="price">R$ 18,90</span><button>Comprar</button></div>
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=400&q=80')"></div><h3>Batom Terracota</h3><span class="price">R$ 52,90</span><button>Comprar</button></div>
+                    </div>
+                </div>
+                <button class="carousel-btn next" aria-label="Próximo"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+            </div>
+            <div class="carousel-dots"></div>
+        </div>
+
+        <!-- ABA: Skincare -->
+        <div class="tab-panel" id="tab-skincare">
+            <div class="carousel-wrapper">
+                <button class="carousel-btn prev" aria-label="Anterior"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+                <div class="carousel-track-container">
+                    <div class="carousel-track">
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=400&q=80')"></div><h3>Sérum Vitamina C</h3><span class="price">R$ 119,90</span><button>Comprar</button></div>
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1570194065650-d99fb4bedf0a?w=400&q=80')"></div><h3>Hidratante Facial</h3><span class="price">R$ 84,90</span><button>Comprar</button></div>
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=400&q=80')"></div><h3>Protetor Solar FPS50</h3><span class="price">R$ 74,90</span><button>Comprar</button></div>
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1601049676869-702ea24cfd58?w=400&q=80')"></div><h3>Tônico Rosas</h3><span class="price">R$ 59,90</span><button>Comprar</button></div>
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1583241800698-e8ab01830a22?w=400&q=80')"></div><h3>Máscara Argila</h3><span class="price">R$ 49,90</span><button>Comprar</button></div>
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&q=80')"></div><h3>Esfoliante Suave</h3><span class="price">R$ 44,90</span><button>Comprar</button></div>
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=400&q=80')"></div><h3>Óleo Facial</h3><span class="price">R$ 94,90</span><button>Comprar</button></div>
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=400&q=80')"></div><h3>Contorno Olhos</h3><span class="price">R$ 79,90</span><button>Comprar</button></div>
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1503236823255-94609f598e71?w=400&q=80')"></div><h3>Água Micelar</h3><span class="price">R$ 39,90</span><button>Comprar</button></div>
+                        <div class="product-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=400&q=80')"></div><h3>Gel de Limpeza</h3><span class="price">R$ 34,90</span><button>Comprar</button></div>
+                    </div>
+                </div>
+                <button class="carousel-btn next" aria-label="Próximo"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+            </div>
+            <div class="carousel-dots"></div>
+        </div>
+
+    </section>
+
+    <!-- ── Ofertas ── -->
+    <section class="ofertas-section" id="ofertas">
+        <div class="section-label">Promoções</div>
+        <h2 class="section-title">Ofertas Especiais</h2>
+
+        <!-- Carrossel 1: Mais Vendidos -->
+        <div class="oferta-bloco">
+            <div class="oferta-header">
+                <span class="oferta-tag">🔥 Mais Vendidos</span>
+                <p class="oferta-desc">Os queridinhos com desconto imperdível</p>
+            </div>
+            <div class="carousel-wrapper">
+                <button class="carousel-btn prev" aria-label="Anterior"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+                <div class="carousel-track-container">
+                    <div class="carousel-track">
+                        <div class="product-card oferta-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1586495777744-4e6232bf2263?w=400&q=80')"></div><h3>Batom Velvet</h3><span class="price-old">R$ 49,90</span><span class="price price-oferta">R$ 34,90</span><span class="badge-desc">-30%</span><button>Comprar</button></div>
+                        <div class="product-card oferta-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=400&q=80')"></div><h3>Paleta Glow</h3><span class="price-old">R$ 89,90</span><span class="price price-oferta">R$ 59,90</span><span class="badge-desc">-33%</span><button>Comprar</button></div>
+                        <div class="product-card oferta-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&q=80')"></div><h3>Blush Rosé</h3><span class="price-old">R$ 54,90</span><span class="price price-oferta">R$ 39,90</span><span class="badge-desc">-27%</span><button>Comprar</button></div>
+                        <div class="product-card oferta-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1583241800698-e8ab01830a22?w=400&q=80')"></div><h3>Iluminador Pérola</h3><span class="price-old">R$ 74,90</span><span class="price price-oferta">R$ 49,90</span><span class="badge-desc">-33%</span><button>Comprar</button></div>
+                        <div class="product-card oferta-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400&q=80')"></div><h3>Máscara Volume</h3><span class="price-old">R$ 39,90</span><span class="price price-oferta">R$ 27,90</span><span class="badge-desc">-30%</span><button>Comprar</button></div>
+                        <div class="product-card oferta-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1503236823255-94609f598e71?w=400&q=80')"></div><h3>Gloss Cristal</h3><span class="price-old">R$ 29,90</span><span class="price price-oferta">R$ 19,90</span><span class="badge-desc">-33%</span><button>Comprar</button></div>
+                        <div class="product-card oferta-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=400&q=80')"></div><h3>Delineador Silk</h3><span class="price-old">R$ 34,90</span><span class="price price-oferta">R$ 24,90</span><span class="badge-desc">-29%</span><button>Comprar</button></div>
+                        <div class="product-card oferta-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1599733589046-833f6c4c8b9e?w=400&q=80')"></div><h3>Contorno Soft</h3><span class="price-old">R$ 59,90</span><span class="price price-oferta">R$ 42,90</span><span class="badge-desc">-28%</span><button>Comprar</button></div>
+                        <div class="product-card oferta-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=400&q=80')"></div><h3>Sérum Vitamina C</h3><span class="price-old">R$ 119,90</span><span class="price price-oferta">R$ 79,90</span><span class="badge-desc">-33%</span><button>Comprar</button></div>
+                        <div class="product-card oferta-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1631214524020-3c69b3b0b3b3?w=400&q=80')"></div><h3>Base Nude</h3><span class="price-old">R$ 69,90</span><span class="price price-oferta">R$ 47,90</span><span class="badge-desc">-31%</span><button>Comprar</button></div>
+                    </div>
+                </div>
+                <button class="carousel-btn next" aria-label="Próximo"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+            </div>
+            <div class="carousel-dots"></div>
+        </div>
+
+        <!-- Carrossel 2: Kits & Combos -->
+        <div class="oferta-bloco">
+            <div class="oferta-header">
+                <span class="oferta-tag">🎁 Kits & Combos</span>
+                <p class="oferta-desc">Leve mais, pague menos</p>
+            </div>
+            <div class="carousel-wrapper">
+                <button class="carousel-btn prev" aria-label="Anterior"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+                <div class="carousel-track-container">
+                    <div class="carousel-track">
+                        <div class="product-card oferta-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=400&q=80')"></div><h3>Kit Olhos Perfeitos</h3><span class="price-old">R$ 139,90</span><span class="price price-oferta">R$ 89,90</span><span class="badge-desc">-36%</span><button>Comprar</button></div>
+                        <div class="product-card oferta-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1570194065650-d99fb4bedf0a?w=400&q=80')"></div><h3>Kit Skincare Básico</h3><span class="price-old">R$ 199,90</span><span class="price price-oferta">R$ 129,90</span><span class="badge-desc">-35%</span><button>Comprar</button></div>
+                        <div class="product-card oferta-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=400&q=80')"></div><h3>Kit Lábios Nude</h3><span class="price-old">R$ 99,90</span><span class="price price-oferta">R$ 64,90</span><span class="badge-desc">-35%</span><button>Comprar</button></div>
+                        <div class="product-card oferta-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1601049676869-702ea24cfd58?w=400&q=80')"></div><h3>Kit Glow Total</h3><span class="price-old">R$ 179,90</span><span class="price price-oferta">R$ 119,90</span><span class="badge-desc">-33%</span><button>Comprar</button></div>
+                        <div class="product-card oferta-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1614159102822-c7e3e3e3e3e3?w=400&q=80')"></div><h3>Kit Base + Primer</h3><span class="price-old">R$ 109,90</span><span class="price price-oferta">R$ 74,90</span><span class="badge-desc">-32%</span><button>Comprar</button></div>
+                        <div class="product-card oferta-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1583241800698-e8ab01830a22?w=400&q=80')"></div><h3>Kit Maquiagem Dia</h3><span class="price-old">R$ 159,90</span><span class="price price-oferta">R$ 99,90</span><span class="badge-desc">-38%</span><button>Comprar</button></div>
+                        <div class="product-card oferta-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&q=80')"></div><h3>Kit Noite Especial</h3><span class="price-old">R$ 189,90</span><span class="price price-oferta">R$ 124,90</span><span class="badge-desc">-34%</span><button>Comprar</button></div>
+                        <div class="product-card oferta-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=400&q=80')"></div><h3>Kit Anti-Idade</h3><span class="price-old">R$ 249,90</span><span class="price price-oferta">R$ 169,90</span><span class="badge-desc">-32%</span><button>Comprar</button></div>
+                        <div class="product-card oferta-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1503236823255-94609f598e71?w=400&q=80')"></div><h3>Kit Iniciante</h3><span class="price-old">R$ 129,90</span><span class="price price-oferta">R$ 84,90</span><span class="badge-desc">-35%</span><button>Comprar</button></div>
+                        <div class="product-card oferta-card"><div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=400&q=80')"></div><h3>Kit Presente Luxo</h3><span class="price-old">R$ 299,90</span><span class="price price-oferta">R$ 199,90</span><span class="badge-desc">-33%</span><button>Comprar</button></div>
+                    </div>
+                </div>
+                <button class="carousel-btn next" aria-label="Próximo"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+            </div>
+            <div class="carousel-dots"></div>
+        </div>
+    </section>
+
+    <!-- ── Localidade & Contato ── -->
+    <section class="info-section" id="contato">
+        <div class="info-grid">
+
+            <div class="info-block">
+                <div class="info-icon">&#9679;</div>
+                <h4>Onde Estamos</h4>
+                <p>Rua das Flores, 142 — Centro<br>São Paulo, SP — 01310-000</p>
+                <p class="info-sub">Segunda a Sábado: 9h às 20h<br>Domingo: 10h às 16h</p>
+            </div>
+
+            <div class="info-block">
+                <div class="info-icon">&#9679;</div>
+                <h4>Fale Conosco</h4>
+                <p>(11) 9 9999-0000</p>
+                <p>contato@makebeauty.com.br</p>
+                <p class="info-sub">Respondemos em até 24h</p>
+            </div>
+
+            <div class="info-block">
+                <div class="info-icon">&#9679;</div>
+                <h4>Redes Sociais</h4>
+                <p>@makebeauty</p>
+                <div class="social-links">
+                    <a href="#">Instagram</a>
+                    <a href="#">TikTok</a>
+                    <a href="#">Pinterest</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <span>© 2026 Make Beauty — Todos os direitos reservados</span>
+    </footer>
+
+    <script src="amora.js"></script>
+</body>
+</html>
+
