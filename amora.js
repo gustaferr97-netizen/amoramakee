@@ -17,6 +17,23 @@ window.addEventListener('scroll', function () {
     document.getElementById('scrollProgress').style.width = pct + '%';
 });
 
+// ── Menu hamburguer ──
+const navToggle = document.getElementById('navToggle');
+const mainNav = document.getElementById('mainNav');
+
+navToggle.addEventListener('click', () => {
+    navToggle.classList.toggle('open');
+    mainNav.classList.toggle('open');
+});
+
+// fecha o menu ao clicar em um link
+mainNav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+        navToggle.classList.remove('open');
+        mainNav.classList.remove('open');
+    });
+});
+
 // ── Abas ──
 document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', () => {
