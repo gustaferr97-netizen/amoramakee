@@ -17,7 +17,66 @@ window.addEventListener('scroll', function () {
     document.getElementById('scrollProgress').style.width = pct + '%';
 });
 
-// ── Menu hamburguer ──
+// ── Animação de letras nos títulos ──
+function splitTitle(el) {
+    const text = el.textContent.trim();
+    el.textContent = '';
+    el.style.perspective = '600px';
+
+    [...text].forEach((char, i) => {
+        const span = document.createElement('span');
+        if (char === ' ') {
+            span.className = 'char space';
+        } else {
+            span.className = 'char';
+            span.textContent = char;
+            // alterna esquerda/direita
+            span.dataset.side = i % 2 === 0 ? 'left' : 'right';
+        }
+        el.appendChild(span);
+    });
+}
+
+const titleObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const chars = entry.target.querySelectorAll('.char[data-side]');
+        chars.forEach((char, i) => {
+            const side = char.dataset.side;
+            setTimeout(() => {
+                char.classList.add(side === 'left' ? 'animate-left' : 'animate-right');
+            }, i * 60);
+        });
+        titleObserver.unobserve(entry.target);
+    });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('.section-title').forEach(el => {
+    splitTitle(el);
+    titleObserver.observe(el);
+});
+
+// ── Reveal ao scroll (Intersection Observer) ──
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.section-title, .section-label').forEach(el => {
+    el.classList.add('reveal');
+    revealObserver.observe(el);
+});
+
+document.querySelectorAll('.info-block').forEach(el => revealObserver.observe(el));
+
+document.querySelectorAll('.oferta-header, .tabs-nav').forEach(el => {
+    el.classList.add('reveal');
+    revealObserver.observe(el);
+});
+
 const navToggle = document.getElementById('navToggle');
 const mainNav = document.getElementById('mainNav');
 
@@ -241,40 +300,27 @@ document.addEventListener('click', function (e) {
     }
 });
 
-// ── Finalizar Compra → Mercado Pago ──
-document.getElementById('btnCheckout').addEventListener('click', async function () {
-    this.disabled = true;
-    this.textContent = 'Aguarde...';
+// ── Finalizar Compra → WhatsApp ──
+document.getElementById('btnCheckout').addEventListener('click', function () {
+    if (cart.length === 0) return;
 
-    const items = cart.map(i => ({
-        title: i.name,
-        quantity: i.qty,
-        unit_price: i.price,
-        currency_id: 'BRL'
-    }));
+    // ⚠️ Substitua pelo número do WhatsApp da loja (com código do país, sem + ou espaços)
+    const numero = '559884834689';
 
-    try {
-        // Chama seu servidor local que cria a preferência no Mercado Pago
-        const res = await fetch('http://localhost:3000/criar-preferencia', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ items })
-        });
+    const itens = cart.map(i =>
+        `• ${i.name} x${i.qty} — R$ ${(i.price * i.qty).toFixed(2).replace('.', ',')}`
+    ).join('\n');
 
-        const data = await res.json();
+    const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
 
-        if (data.init_point) {
-            window.location.href = data.init_point; // redireciona para o MP
-        } else {
-            alert('Erro ao iniciar pagamento. Tente novamente.');
-            this.disabled = false;
-            this.textContent = 'Finalizar Compra';
-        }
-    } catch (err) {
-        alert('Não foi possível conectar ao servidor de pagamento.');
-        this.disabled = false;
-        this.textContent = 'Finalizar Compra';
-    }
+    const mensagem =
+        `Olá! Gostaria de fazer um pedido 🛍️\n\n` +
+        `*Itens selecionados:*\n${itens}\n\n` +
+        `*Total: R$ ${total.toFixed(2).replace('.', ',')}*\n\n` +
+        `Poderia me ajudar com a finalização?`;
+
+    const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+    window.open(url, '_blank');
 });
 
 renderCart();

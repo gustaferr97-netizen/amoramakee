@@ -1047,3 +1047,238 @@ footer {
     /* Footer */
     footer { padding: 16px 5%; font-size: 0.68rem; }
 }
+
+/* ════════════════════════════════
+   ANIMAÇÕES
+   ════════════════════════════════ */
+
+/* ── Keyframes ── */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(32px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes slideLeft {
+    from { opacity: 0; transform: translateX(-28px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes lineGrow {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+}
+
+@keyframes shimmer {
+    0%   { background-position: -400px 0; }
+    100% { background-position: 400px 0; }
+}
+
+/* ── Elementos que entram ao scroll ── */
+.reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1),
+                transform 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* delay em cascata para cards */
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ── Hero ── */
+.hero-content h1 {
+    animation: fadeUp 1s cubic-bezier(0.4,0,0.2,1) both;
+    animation-delay: 0.2s;
+}
+
+.hero-content p {
+    animation: fadeUp 1s cubic-bezier(0.4,0,0.2,1) both;
+    animation-delay: 0.45s;
+}
+
+.hero-content .btn-shop {
+    animation: fadeUp 1s cubic-bezier(0.4,0,0.2,1) both;
+    animation-delay: 0.65s;
+}
+
+/* ── Linha decorativa sob títulos de seção ── */
+.section-title {
+    position: relative;
+    display: block;
+    text-align: center;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--terracota);
+    margin: 14px auto 0;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.6s cubic-bezier(0.4,0,0.2,1) 0.3s;
+}
+
+.section-title.visible::after {
+    transform: scaleX(1);
+}
+
+/* ── Logo pulse suave ao carregar ── */
+.logo {
+    animation: fadeIn 0.8s ease both;
+}
+
+/* ── Nav links ── */
+nav ul li {
+    animation: fadeIn 0.6s ease both;
+}
+nav ul li:nth-child(1) { animation-delay: 0.1s; }
+nav ul li:nth-child(2) { animation-delay: 0.2s; }
+nav ul li:nth-child(3) { animation-delay: 0.3s; }
+nav ul li:nth-child(4) { animation-delay: 0.4s; }
+
+/* ── Botões: ripple no clique ── */
+.btn-shop,
+.btn-checkout,
+.carousel-track .product-card button,
+.tab-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-shop::before,
+.btn-checkout::before,
+.carousel-track .product-card button::before,
+.tab-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(176,112,96,0.12);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+    z-index: 0;
+}
+
+.btn-shop:hover::before,
+.btn-checkout:hover::before,
+.carousel-track .product-card button:hover::before,
+.tab-btn:hover::before {
+    transform: scaleX(1);
+}
+
+.btn-shop span,
+.btn-checkout span,
+.carousel-track .product-card button span {
+    position: relative;
+    z-index: 1;
+}
+
+/* ── Cards: hover mais expressivo ── */
+.carousel-track .product-card {
+    transition: transform 0.35s cubic-bezier(0.4,0,0.2,1),
+                box-shadow 0.35s cubic-bezier(0.4,0,0.2,1),
+                border-color 0.35s ease;
+}
+
+.carousel-track .product-card:hover {
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 0 20px 48px rgba(0,0,0,0.09);
+}
+
+/* ── Imagem do produto: zoom suave ── */
+.carousel-track .product-img {
+    overflow: hidden;
+    transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+
+.carousel-track .product-card:hover .product-img {
+    transform: scale(1.04);
+}
+
+/* ── Tabs: indicador deslizante ── */
+.tab-btn {
+    transition: color 0.3s, border-color 0.3s, transform 0.2s;
+}
+
+.tab-btn:active { transform: scale(0.97); }
+
+/* ── Info blocks: slide da esquerda ── */
+.info-block {
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.info-block.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.info-block:nth-child(1) { transition-delay: 0s; }
+.info-block:nth-child(2) { transition-delay: 0.15s; }
+.info-block:nth-child(3) { transition-delay: 0.3s; }
+
+/* ── Oferta badge: pulso ── */
+@keyframes badgePulse {
+    0%, 100% { transform: scale(1); }
+    50%       { transform: scale(1.08); }
+}
+
+.badge-desc {
+    animation: badgePulse 2.4s ease-in-out infinite;
+}
+
+/* ── Scroll progress: gradiente animado ── */
+.scroll-progress {
+    background: linear-gradient(90deg, var(--nude), var(--terracota), var(--nude));
+    background-size: 200% 100%;
+    animation: shimmer 3s linear infinite;
+}
+
+/* ════════════════════════════════
+   ANIMAÇÃO DE LETRAS — TÍTULOS
+   ════════════════════════════════ */
+
+@keyframes letterFromLeft {
+    from { opacity: 0; transform: translateX(-60px) rotateY(-40deg); }
+    to   { opacity: 1; transform: translateX(0) rotateY(0deg); }
+}
+
+@keyframes letterFromRight {
+    from { opacity: 0; transform: translateX(60px) rotateY(40deg); }
+    to   { opacity: 1; transform: translateX(0) rotateY(0deg); }
+}
+
+.section-title .char {
+    display: inline-block;
+    opacity: 0;
+    transform-style: preserve-3d;
+    will-change: transform, opacity;
+}
+
+.section-title .char.space {
+    display: inline-block;
+    width: 0.3em;
+}
+
+.section-title .char.animate-left {
+    animation: letterFromLeft 0.5s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+
+.section-title .char.animate-right {
+    animation: letterFromRight 0.5s cubic-bezier(0.4,0,0.2,1) forwards;
+}
