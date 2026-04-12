@@ -1282,3 +1282,163 @@ nav ul li:nth-child(4) { animation-delay: 0.4s; }
 .section-title .char.animate-right {
     animation: letterFromRight 0.5s cubic-bezier(0.4,0,0.2,1) forwards;
 }
+
+/* ── Modal de agradecimento ── */
+@keyframes modalIn {
+    from { opacity: 0; transform: translateY(32px) scale(0.96); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.thankyou-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(44,44,44,0.55);
+    backdrop-filter: blur(6px);
+    z-index: 500;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.thankyou-overlay.open {
+    display: flex;
+}
+
+.thankyou-box {
+    background: var(--branco);
+    max-width: 440px;
+    width: 100%;
+    padding: 52px 40px 40px;
+    text-align: center;
+    animation: modalIn 0.5s cubic-bezier(0.4,0,0.2,1) both;
+    position: relative;
+}
+
+.thankyou-icon {
+    font-size: 2rem;
+    color: var(--terracota);
+    margin-bottom: 20px;
+    display: block;
+    animation: badgePulse 2s ease-in-out infinite;
+}
+
+.thankyou-box h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.9rem;
+    font-weight: 300;
+    color: var(--grafite);
+    margin-bottom: 16px;
+    line-height: 1.2;
+}
+
+.thankyou-box p {
+    font-size: 0.88rem;
+    color: #777;
+    line-height: 1.75;
+    margin-bottom: 8px;
+}
+
+.thankyou-sub {
+    font-size: 0.82rem !important;
+    color: var(--terracota) !important;
+    margin-bottom: 32px !important;
+}
+
+.thankyou-close {
+    background: var(--grafite);
+    color: var(--branco);
+    border: none;
+    padding: 14px 36px;
+    cursor: pointer;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition: background 0.3s;
+    width: 100%;
+}
+
+.thankyou-close:hover {
+    background: var(--terracota);
+}
+
+/* ── Modal agradecimento — mobile ── */
+@media (max-width: 640px) {
+    .thankyou-overlay {
+        align-items: flex-end;
+        padding: 0;
+    }
+
+    .thankyou-box {
+        padding: 36px 24px 32px;
+        width: 100%;
+        max-width: 100%;
+        border-radius: 0;
+        animation: modalInMobile 0.4s cubic-bezier(0.4,0,0.2,1) both;
+    }
+
+    .thankyou-box h2 {
+        font-size: 1.5rem;
+    }
+
+    .thankyou-box p {
+        font-size: 0.84rem;
+    }
+}
+
+@keyframes modalInMobile {
+    from { opacity: 0; transform: translateY(100%); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Modal confirmação ── */
+.confirm-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(44,44,44,0.55);
+    backdrop-filter: blur(6px);
+    z-index: 500;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.confirm-overlay.open {
+    display: flex;
+}
+
+.confirm-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    margin-top: 8px;
+}
+
+.confirm-no {
+    background: transparent;
+    color: var(--grafite);
+    border: 1px solid var(--nude);
+    padding: 14px 36px;
+    cursor: pointer;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition: background 0.3s, border-color 0.3s;
+    width: 100%;
+}
+
+.confirm-no:hover {
+    background: var(--nude);
+    border-color: var(--nude);
+}
+
+@media (max-width: 640px) {
+    .confirm-overlay {
+        align-items: flex-end;
+        padding: 0;
+    }
+}

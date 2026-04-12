@@ -305,7 +305,7 @@ document.getElementById('btnCheckout').addEventListener('click', function () {
     if (cart.length === 0) return;
 
     // ⚠️ Substitua pelo número do WhatsApp da loja (com código do país, sem + ou espaços)
-    const numero = '559884834689';
+    const numero = '9884834689';
 
     const itens = cart.map(i =>
         `• ${i.name} x${i.qty} — R$ ${(i.price * i.qty).toFixed(2).replace('.', ',')}`
@@ -321,6 +321,30 @@ document.getElementById('btnCheckout').addEventListener('click', function () {
 
     const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
     window.open(url, '_blank');
+
+    // pergunta se finalizou antes de mostrar agradecimento
+    closeCart();
+    setTimeout(() => {
+        document.getElementById('confirmOverlay').classList.add('open');
+    }, 800);
+});
+
+// confirmou → mostra agradecimento e zera carrinho
+document.getElementById('confirmYes').addEventListener('click', () => {
+    document.getElementById('confirmOverlay').classList.remove('open');
+    document.getElementById('thankyouOverlay').classList.add('open');
+});
+
+// não confirmou → fecha modal, mantém carrinho
+document.getElementById('confirmNo').addEventListener('click', () => {
+    document.getElementById('confirmOverlay').classList.remove('open');
+    openCart();
+});
+
+document.getElementById('thankyouClose').addEventListener('click', () => {
+    document.getElementById('thankyouOverlay').classList.remove('open');
+    cart.length = 0;
+    renderCart();
 });
 
 renderCart();
