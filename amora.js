@@ -1,4 +1,45 @@
-// ── Header scroll ──
+// ── Configuração da loja ──
+const LOJA = {
+    numeroWhatsapp: '9884834689', // ⚠️ número da loja
+    pixChave: null,               // lido do HTML
+    horario: { abre: 8, fecha: 20 } // horário de atendimento (horas inteiras)
+};
+
+// ── Verifica se a loja está aberta ──
+function lojaAberta() {
+    const agora = new Date();
+    const h = agora.getHours();
+    return h >= LOJA.horario.abre && h < LOJA.horario.fecha;
+}
+
+function labelHorario() {
+    return `${String(LOJA.horario.abre).padStart(2,'0')}h às ${String(LOJA.horario.fecha).padStart(2,'0')}h`;
+}
+
+function diaSeguinte() {
+    const d = new Date();
+    d.setDate(d.getDate() + 1);
+    return d.toLocaleDateString('pt-BR', { weekday: 'long', day: '2-digit', month: '2-digit' });
+}
+// ── Exibe banner e aviso no modal se fora do horário ──
+(function () {
+    if (!lojaAberta()) {
+        const banner = document.getElementById('horarioBanner');
+        const msg    = document.getElementById('horarioMsg');
+        const boxModal = document.getElementById('foraHorarioBox');
+        const msgModal = document.getElementById('foraHorarioMsg');
+        const txt = `Atendimento encerrado. Seu pedido será processado amanhã (${diaSeguinte()}) a partir das ${labelHorario().split(' às ')[0]}.`;
+
+        msg.textContent = txt;
+        banner.classList.add('show');
+
+        if (boxModal && msgModal) {
+            msgModal.innerHTML = `Estamos fora do horário de atendimento <strong>(${labelHorario()})</strong>. Seu pedido será enviado e processado <strong>amanhã, ${diaSeguinte()}</strong>.`;
+            boxModal.classList.add('show');
+        }
+    }
+})();
+
 window.addEventListener('scroll', function () {
     const header = document.querySelector('header');
     if (window.scrollY > 50) {
@@ -301,11 +342,117 @@ document.addEventListener('click', function (e) {
 });
 
 // ── Finalizar Compra → WhatsApp ──
+// ── Modal de endereço ──
 document.getElementById('btnCheckout').addEventListener('click', function () {
     if (cart.length === 0) return;
+    closeCart();
+    document.getElementById('addressOverlay').classList.add('open');
+});
 
-    // ⚠️ Substitua pelo número do WhatsApp da loja (com código do país, sem + ou espaços)
-    const numero = '9884834689';
+document.getElementById('addressClose').addEventListener('click', () => {
+    document.getElementById('addressOverlay').classList.remove('open');
+    openCart();
+});
+
+// busca CEP automática via ViaCEP
+document.getElementById('cep').addEventListener('input', function () {
+    const val = this.value.replace(/\D/g, '');
+    this.value = val.length > 5 ? val.slice(0,5) + '-' + val.slice(5,8) : val;
+
+    if (val.length === 8) {
+        const loader = document.getElementById('cepLoading');
+        loader.classList.add('show');
+        fetch(`https://viacep.com.br/ws/${val}/json/`)
+            .then(r => r.json())
+            .then(d => {
+                loader.classList.remove('show');
+                if (!d.erro) {
+                    document.getElementById('rua').value    = d.logradouro || '';
+                    document.getElementById('bairro').value = d.bairro     || '';
+                    document.getElementById('cidade').value = d.localidade || '';
+                    document.getElementById('uf').value     = d.uf         || '';
+                    document.getElementById('numero').focus();
+                }
+            })
+            .catch(() => loader.classList.remove('show'));
+    }
+});
+
+// etapa 1 → etapa 2
+document.getElementById('addressForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const obrigatorios = ['cep','rua','numero','bairro','cidade','uf'];
+    let valid = true;
+    obrigatorios.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el.value.trim()) { el.classList.add('error'); valid = false; }
+        else el.classList.remove('error');
+    });
+    if (!valid) return;
+
+    // avança para etapa 2
+    document.getElementById('addressForm').style.display = 'none';
+    document.getElementById('paymentStep').style.display = 'flex';
+    document.getElementById('addressTitle').textContent = 'Pagamento & Detalhes';
+    document.getElementById('step1-ind').classList.remove('active');
+    document.getElementById('step2-ind').classList.add('active');
+});
+
+// voltar para etapa 1
+document.getElementById('backToAddress').addEventListener('click', () => {
+    document.getElementById('paymentStep').style.display = 'none';
+    document.getElementById('addressForm').style.display = 'flex';
+    document.getElementById('addressTitle').textContent = 'Endereço de entrega';
+    document.getElementById('step1-ind').classList.add('active');
+    document.getElementById('step2-ind').classList.remove('active');
+});
+
+// mostrar/ocultar pix box
+document.querySelectorAll('input[name="pagamento"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+        const pixBox = document.getElementById('pixBox');
+        pixBox.classList.toggle('show', radio.value === 'Pix' && radio.checked);
+    });
+});
+
+// copiar chave pix
+document.getElementById('pixCopy').addEventListener('click', function () {
+    const chave = document.getElementById('pixKeyDisplay').textContent;
+    navigator.clipboard.writeText(chave).then(() => {
+        this.textContent = 'Copiado!';
+        this.classList.add('copied');
+        setTimeout(() => { this.textContent = 'Copiar'; this.classList.remove('copied'); }, 2000);
+    });
+});
+
+// enviar para WhatsApp (etapa 2)
+document.getElementById('sendWhatsapp').addEventListener('click', function () {
+    const pagamento = document.querySelector('input[name="pagamento"]:checked');
+    if (!pagamento) {
+        alert('Selecione uma forma de pagamento.');
+        return;
+    }
+
+    const numeroLoja = '9884834689'; // ⚠️ número da loja
+    const cep        = document.getElementById('cep').value.trim();
+    const rua        = document.getElementById('rua').value.trim();
+    const num        = document.getElementById('numero').value.trim();
+    const compTipo   = document.getElementById('complementoTipo').value;
+    const compVal    = document.getElementById('complementoValor').value.trim();
+    const bairro     = document.getElementById('bairro').value.trim();
+    const cidade     = document.getElementById('cidade').value.trim();
+    const uf         = document.getElementById('uf').value.trim();
+    const obs        = document.getElementById('observacao').value.trim();
+
+    const complemento = compTipo && compVal ? `, ${compTipo} ${compVal}`
+                      : compTipo            ? `, ${compTipo}`
+                      : compVal             ? `, ${compVal}`
+                      : '';
+
+    const enderecoFmt =
+        `${rua}, ${num}${complemento}\n` +
+        `${bairro} — ${cidade}/${uf}\n` +
+        `CEP: ${cep}`;
 
     const itens = cart.map(i =>
         `• ${i.name} x${i.qty} — R$ ${(i.price * i.qty).toFixed(2).replace('.', ',')}`
@@ -313,17 +460,21 @@ document.getElementById('btnCheckout').addEventListener('click', function () {
 
     const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
 
-    const mensagem =
+    let mensagem =
         `Olá! Gostaria de fazer um pedido 🛍️\n\n` +
+        (!lojaAberta() ? `⏰ *Pedido para: ${diaSeguinte()}*\n\n` : '') +
         `*Itens selecionados:*\n${itens}\n\n` +
         `*Total: R$ ${total.toFixed(2).replace('.', ',')}*\n\n` +
-        `Poderia me ajudar com a finalização?`;
+        `*Forma de pagamento:* ${pagamento.value}\n\n` +
+        `*Endereço de entrega:*\n${enderecoFmt}`;
 
-    const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+    if (obs) mensagem += `\n\n*Observação:* ${obs}`;
+    mensagem += `\n\nPoderia confirmar meu pedido?`;
+
+    const url = `https://wa.me/${numeroLoja}?text=${encodeURIComponent(mensagem)}`;
     window.open(url, '_blank');
 
-    // pergunta se finalizou antes de mostrar agradecimento
-    closeCart();
+    document.getElementById('addressOverlay').classList.remove('open');
     setTimeout(() => {
         document.getElementById('confirmOverlay').classList.add('open');
     }, 800);

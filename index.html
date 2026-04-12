@@ -55,6 +55,12 @@
         </div>
     </aside>
 
+    <!-- ── Banner fora do horário ── -->
+    <div class="horario-banner" id="horarioBanner">
+        <span class="horario-icon">🌙</span>
+        <span id="horarioMsg"></span>
+    </div>
+
     <section class="hero" id="inicio">
         <div class="hero-content">
             <h1>Realce sua beleza natural</h1>
@@ -265,6 +271,138 @@
     <footer>
         <span>© 2026 Make Beauty — Todos os direitos reservados</span>
     </footer>
+
+    <!-- ── Modal de endereço ── -->
+    <div class="address-overlay" id="addressOverlay">
+        <div class="address-box">
+
+            <!-- Indicador de etapas -->
+            <div class="steps-bar">
+                <div class="step active" id="step1-ind"><span>1</span> Endereço</div>
+                <div class="step-line"></div>
+                <div class="step" id="step2-ind"><span>2</span> Pagamento</div>
+            </div>
+
+            <div class="address-header">
+                <h3 id="addressTitle">Endereço de entrega</h3>
+                <button class="cart-close" id="addressClose">&#10005;</button>
+            </div>
+
+            <!-- ── ETAPA 1: Endereço ── -->
+            <form class="address-form" id="addressForm" novalidate>
+                <div class="addr-row">
+                    <div class="addr-field addr-cep">
+                        <label>CEP *</label>
+                        <div class="cep-wrap">
+                            <input type="text" id="cep" placeholder="00000-000" maxlength="9" inputmode="numeric">
+                            <span class="cep-loading" id="cepLoading">⟳</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="addr-row">
+                    <div class="addr-field addr-grow">
+                        <label>Rua / Logradouro *</label>
+                        <input type="text" id="rua" placeholder="Rua das Flores">
+                    </div>
+                    <div class="addr-field addr-num">
+                        <label>Número *</label>
+                        <input type="text" id="numero" placeholder="142" inputmode="numeric">
+                    </div>
+                </div>
+                <div class="addr-row">
+                    <div class="addr-field addr-grow">
+                        <label>Complemento</label>
+                        <div class="complemento-wrap">
+                            <select id="complementoTipo">
+                                <option value="">Tipo</option>
+                                <option value="Apto">Apto</option>
+                                <option value="Casa">Casa</option>
+                                <option value="Bloco">Bloco</option>
+                                <option value="Sala">Sala</option>
+                                <option value="Loja">Loja</option>
+                                <option value="Fundos">Fundos</option>
+                                <option value="Sobrado">Sobrado</option>
+                            </select>
+                            <input type="text" id="complementoValor" placeholder="Ex: 42, B">
+                        </div>
+                    </div>
+                </div>
+                <div class="addr-row">
+                    <div class="addr-field addr-grow">
+                        <label>Bairro *</label>
+                        <input type="text" id="bairro" placeholder="Centro">
+                    </div>
+                </div>
+                <div class="addr-row">
+                    <div class="addr-field addr-grow">
+                        <label>Cidade *</label>
+                        <input type="text" id="cidade" placeholder="São Paulo">
+                    </div>
+                    <div class="addr-field addr-uf">
+                        <label>UF *</label>
+                        <input type="text" id="uf" placeholder="SP" maxlength="2">
+                    </div>
+                </div>
+                <p class="addr-required">* Campos obrigatórios</p>
+
+                <div class="fora-horario-box" id="foraHorarioBox">
+                    <span>🌙</span>
+                    <p id="foraHorarioMsg"></p>
+                </div>
+
+                <button type="submit" class="btn-checkout">Continuar →</button>
+            </form>
+
+            <!-- ── ETAPA 2: Pagamento + Observação ── -->
+            <div class="address-form" id="paymentStep" style="display:none">
+
+                <div class="addr-field">
+                    <label>Forma de pagamento *</label>
+                    <div class="payment-options">
+                        <label class="pay-opt">
+                            <input type="radio" name="pagamento" value="Pix"> 
+                            <span>Pix</span>
+                        </label>
+                        <label class="pay-opt">
+                            <input type="radio" name="pagamento" value="Cartão de Crédito">
+                            <span>Cartão de Crédito</span>
+                        </label>
+                        <label class="pay-opt">
+                            <input type="radio" name="pagamento" value="Cartão de Débito">
+                            <span>Cartão de Débito</span>
+                        </label>
+                        <label class="pay-opt">
+                            <input type="radio" name="pagamento" value="Dinheiro">
+                            <span>Dinheiro</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Chave Pix — aparece ao selecionar Pix -->
+                <div class="pix-box" id="pixBox">
+                    <p class="pix-label">Chave Pix da loja</p>
+                    <div class="pix-key-wrap">
+                        <span id="pixKeyDisplay">gustaferr97@gmail.com</span>
+                        <button type="button" class="pix-copy" id="pixCopy">Copiar</button>
+                    </div>
+                    <p class="pix-hint">Após o pagamento, envie o comprovante pelo WhatsApp.</p>
+                </div>
+
+                <div class="addr-field">
+                    <label>Observação ao vendedor</label>
+                    <textarea id="observacao" placeholder="Ex: Pode deixar na portaria, embrulho para presente, alergia a algum ingrediente..." rows="3"></textarea>
+                </div>
+
+                <p class="addr-required">* Campo obrigatório</p>
+
+                <div class="pay-btns">
+                    <button type="button" class="confirm-no" id="backToAddress">← Voltar</button>
+                    <button type="button" class="btn-checkout" id="sendWhatsapp">Enviar pelo WhatsApp</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
     <!-- ── Modal de confirmação de compra ── -->
     <div class="confirm-overlay" id="confirmOverlay">

@@ -1442,3 +1442,393 @@ nav ul li:nth-child(4) { animation-delay: 0.4s; }
         padding: 0;
     }
 }
+
+/* ── Modal de endereço ── */
+.address-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(28,24,22,0.6);
+    backdrop-filter: blur(8px);
+    z-index: 500;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.address-overlay.open { display: flex; }
+
+.address-box {
+    background: var(--branco);
+    width: 100%;
+    max-width: 460px;
+    animation: modalIn 0.45s cubic-bezier(0.4,0,0.2,1) both;
+    max-height: 92vh;
+    overflow-y: auto;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.14);
+}
+
+/* ── Steps ── */
+.steps-bar {
+    display: flex;
+    align-items: center;
+    padding: 22px 32px 0;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #ccc;
+    font-family: 'Jost', sans-serif;
+    transition: color 0.4s;
+}
+
+.step span {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid #e0d8d4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.62rem;
+    transition: background 0.4s, border-color 0.4s, color 0.4s;
+    flex-shrink: 0;
+}
+
+.step.active { color: var(--grafite); }
+
+.step.active span {
+    background: var(--terracota);
+    border-color: var(--terracota);
+    color: var(--branco);
+}
+
+.step-line {
+    flex: 1;
+    height: 1px;
+    background: var(--nude);
+    margin: 0 14px;
+}
+
+/* ── Header ── */
+.address-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 32px 20px;
+    border-bottom: 1px solid var(--nude);
+    position: sticky;
+    top: 0;
+    background: var(--branco);
+    z-index: 1;
+}
+
+.address-header h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    color: var(--grafite);
+}
+
+/* ── Form ── */
+.address-form {
+    padding: 26px 32px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.addr-row {
+    display: flex;
+    gap: 14px;
+    align-items: flex-end;
+}
+
+.addr-field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.addr-field label {
+    font-size: 0.65rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #b0a8a4;
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+}
+
+/* inputs com linha inferior apenas */
+.addr-field input,
+.addr-field select,
+.addr-field textarea {
+    border: none;
+    border-bottom: 1px solid var(--nude);
+    background: transparent;
+    padding: 8px 0;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.88rem;
+    color: var(--grafite);
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 0;
+    -webkit-appearance: none;
+    transition: border-color 0.25s;
+}
+
+.addr-field input:focus,
+.addr-field select:focus,
+.addr-field textarea:focus {
+    border-bottom-color: var(--terracota);
+}
+
+.addr-field input.error { border-bottom-color: #d07070; }
+
+.addr-field textarea {
+    resize: none;
+    min-height: 72px;
+    line-height: 1.6;
+}
+
+.addr-grow { flex: 1; }
+.addr-num  { width: 80px; flex-shrink: 0; }
+.addr-uf   { width: 56px; flex-shrink: 0; }
+.addr-cep  { width: 150px; }
+
+.cep-wrap { position: relative; }
+.cep-wrap input { padding-right: 24px; }
+
+.cep-loading {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.9rem;
+    color: var(--terracota);
+    display: none;
+    animation: spin 0.8s linear infinite;
+}
+.cep-loading.show { display: block; }
+
+@keyframes spin {
+    from { transform: translateY(-50%) rotate(0deg); }
+    to   { transform: translateY(-50%) rotate(360deg); }
+}
+
+.complemento-wrap { display: flex; gap: 10px; }
+.complemento-wrap select { width: 100px; flex-shrink: 0; cursor: pointer; }
+.complemento-wrap input  { flex: 1; }
+
+.addr-required {
+    font-size: 0.65rem;
+    color: #ccc;
+    letter-spacing: 0.06em;
+    margin-top: -6px;
+}
+
+/* ── Opções de pagamento ── */
+.payment-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 2px;
+}
+
+.pay-opt {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid var(--nude);
+    padding: 13px 14px;
+    cursor: pointer;
+    transition: border-color 0.25s, background 0.25s;
+    font-size: 0.8rem;
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    color: var(--grafite);
+    position: relative;
+}
+
+.pay-opt:hover { border-color: var(--terracota); }
+
+.pay-opt input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* círculo customizado */
+.pay-opt::before {
+    content: '';
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    flex-shrink: 0;
+    transition: border-color 0.25s, background 0.25s;
+    display: block;
+}
+
+.pay-opt:has(input:checked) {
+    border-color: var(--terracota);
+    background: #fdf7f5;
+}
+
+.pay-opt:has(input:checked)::before {
+    background: var(--terracota);
+    border-color: var(--terracota);
+    box-shadow: inset 0 0 0 3px var(--branco);
+}
+
+.pay-opt:has(input:checked) span { color: var(--terracota); }
+
+/* ── Pix box ── */
+.pix-box {
+    border-top: 1px solid var(--nude);
+    padding-top: 16px;
+    display: none;
+    animation: fadeUp 0.3s ease both;
+}
+
+.pix-box.show { display: block; }
+
+.pix-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #b0a8a4;
+    margin-bottom: 10px;
+    font-family: 'Jost', sans-serif;
+}
+
+.pix-key-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--creme);
+    padding: 12px 16px;
+    margin-bottom: 8px;
+}
+
+.pix-key-wrap span {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.88rem;
+    color: var(--grafite);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    word-break: break-all;
+    flex: 1;
+}
+
+.pix-copy {
+    background: transparent;
+    color: var(--terracota);
+    border: 1px solid var(--terracota);
+    padding: 6px 14px;
+    cursor: pointer;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: background 0.25s, color 0.25s;
+    flex-shrink: 0;
+}
+
+.pix-copy:hover { background: var(--terracota); color: var(--branco); }
+.pix-copy.copied { background: #7aaa7a; border-color: #7aaa7a; color: var(--branco); }
+
+.pix-hint {
+    font-size: 0.72rem;
+    color: #bbb;
+    line-height: 1.6;
+    font-style: italic;
+}
+
+/* ── Botões etapa 2 ── */
+.pay-btns {
+    display: flex;
+    gap: 10px;
+    margin-top: 4px;
+}
+
+.pay-btns .confirm-no  { flex: 1; }
+.pay-btns .btn-checkout { flex: 2; }
+
+/* ── Mobile ── */
+@media (max-width: 640px) {
+    .address-overlay { align-items: flex-end; padding: 0; }
+
+    .address-box {
+        max-width: 100%;
+        max-height: 93vh;
+        animation: modalInMobile 0.4s cubic-bezier(0.4,0,0.2,1) both;
+    }
+
+    .steps-bar    { padding: 18px 20px 0; }
+    .address-header { padding: 14px 20px 16px; }
+    .address-form { padding: 20px 20px 28px; gap: 16px; }
+
+    .addr-row { flex-wrap: wrap; }
+    .addr-num, .addr-uf, .addr-cep { width: 100%; }
+    .complemento-wrap { flex-direction: column; }
+    .complemento-wrap select { width: 100%; }
+    .payment-options { grid-template-columns: 1fr; }
+    .pay-btns { flex-direction: column; }
+}
+
+/* ── Banner fora do horário ── */
+.horario-banner {
+    display: none;
+    background: var(--grafite);
+    color: rgba(255,255,255,0.85);
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    font-family: 'Jost', sans-serif;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 99;
+}
+
+.horario-banner.show { display: flex; }
+
+.horario-icon { font-size: 0.9rem; }
+
+/* ── Aviso dentro do modal ── */
+.fora-horario-box {
+    background: #fdf7f0;
+    border-left: 2px solid var(--terracota);
+    padding: 14px 16px;
+    display: none;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.fora-horario-box.show { display: flex; }
+
+.fora-horario-box p {
+    font-size: 0.8rem;
+    color: var(--grafite);
+    line-height: 1.6;
+    font-family: 'Jost', sans-serif;
+}
+
+.fora-horario-box strong {
+    color: var(--terracota);
+    font-weight: 500;
+}
